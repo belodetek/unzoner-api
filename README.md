@@ -167,7 +167,6 @@ SMTP_USERNAME | Your Gmail email address | (e.g) `team@acme.com`
 #### get optional services
 
     curl "${api_url}/alpha/US/services/default/0" \
-      -H 'Accept: application/json'\
       -H "X-Auth-Token: ${AUTH_TOKEN}"
 
 #### get countries
@@ -220,13 +219,14 @@ SMTP_USERNAME | Your Gmail email address | (e.g) `team@acme.com`
     af=4
     type=4
     balena_device_uuid=$(uuid | sed 's/-//g')
-    country='United States'
-    city='New York'
+    json=$(curl -s mgmt.${DNS_DOMAIN}/json)
+    country=$(echo ${json} | jq -r .country)
+    city=$(echo ${json} | jq -r .city)
+    ip=$(echo ${json} | jq -r .ip)
 
-    ip=$(echo $((RANDOM%256)).$((RANDOM%256)).$((RANDOM%256)).$((RANDOM%256)))
     curl -X PUT "${api_url}/device/${type}/${balena_device_uuid}/${af}" \
       -H "X-Auth-Token: ${AUTH_TOKEN}" \
-      -H 'Content-Type: application/json'
+      -H 'Content-Type: application/json' \
       -d "{\"weight\":1,\"cipher\":null,\"auth\":null,\"upnp\":0,\"hostapd\":0,\"ip\":\"${ip}\",\"country\":\"${country}\",\"city\":\"${city}\",\"conns\":0,\"weight\":1,\"bytesin\":0,\"bytesout\":0,\"status\":1}"
 
 #### get device info

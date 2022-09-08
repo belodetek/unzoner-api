@@ -60,10 +60,10 @@ def init_cache():
             try:
                 cmds.append({'key': paypal_email, 'value': paypal_baid})
             except Exception:
-                print(repr(e))
                 if DEBUG: print_exc()
 
         return cache_pipe_set(cmds=cmds)
+
     except Exception as e:
         print(repr(e))
         if DEBUG: print_exc()
