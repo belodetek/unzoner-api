@@ -175,12 +175,12 @@ SMTP_USERNAME | Your Gmail email address | (e.g) `team@acme.com`
 ##### all
 
     curl "${api_url}/countries/all" \
-      -H "X-Auth-Token: ${AUTH_TOKEN}"
+      -H "X-Auth-Token: ${AUTH_TOKEN}" | jq -r
 
 ##### available
 
     curl "${api_url}/countries/available" \
-      -H "X-Auth-Token: ${AUTH_TOKEN}"
+      -H "X-Auth-Token: ${AUTH_TOKEN}" | jq -r
 
 ##### available (flags)
 
