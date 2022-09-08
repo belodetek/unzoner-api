@@ -1,0 +1,14 @@
+cffi==1.14.3
+Flask-SQLAlchemy==2.4.4
+Flask-SSLify==0.1.5
+Flask==1.1.4
+git+https://github.com/ab77/blockcypher-python.git@master#egg=blockcypher
+git+https://github.com/paypal/PayPal-Python-SDK.git@master#egg=paypalrestsdk
+GitPython==3.1.11
+markupsafe==2.0.1
+multiprocessing_on_dill==3.5.0a4
+Pillow==8.0.1
+PyJWT==1.7.1
+PyMySQL==0.10.1
+redis==3.5.3
+requests==2.24.0

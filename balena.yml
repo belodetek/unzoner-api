@@ -1,0 +1,37 @@
+---
+name: Unzoner API
+type: sw.block
+description: black.box Unzoner API
+fleetcta: Copy pasta!
+post-provisioning: |
+  [![publish to balenaCloud](https://github.com/belodetek/unzoner-api/actions/workflows/balena.yml/badge.svg?branch=master)](https://github.com/belodetek/unzoner-api/actions/workflows/balena.yml)
+
+  > 📜 Your unblocking journey starts [here](http://unzoner.com/#instructions)...
+
+  ## Getting started
+  > [build and run](https://github.com/belodetek/unzoner-api/blob/master/README.md#usage) your own black.box Unzoner API
+
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/belodetek/unzoner-api'
+  logo:
+    type: blob.asset
+    data:
+      url: 'https://raw.githubusercontent.com/belodetek/unzoner-api/master/logo.png'
+data:
+  defaultDeviceType: genericx86-64-ext
+  supportedDeviceTypes:
+    - fincm3
+    - generic-amd64
+    - genericx86-64-ext
+    - intel-nuc
+    - qemux86
+    - qemux86-64
+    - raspberry-pi
+    - raspberry-pi2
+    - raspberrypi3
+    - raspberrypi3-64
+    - raspberrypi4-64
+version: 0.0.1
