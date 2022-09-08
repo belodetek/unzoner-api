@@ -1,0 +1,24 @@
+CREATE EVENT `purge_device`
+ON SCHEDULE EVERY 1 HOUR
+DO
+    DELETE FROM ebdb.device WHERE dt <= DATE_SUB(NOW(), INTERVAL 1 hour);
+
+CREATE EVENT `purge_video_diags`
+ON SCHEDULE EVERY 24 HOUR
+DO
+    DELETE FROM ebdb.errors WHERE ts <= DATE_SUB(NOW(), INTERVAL 24 hour);
+    DELETE FROM ebdb.nflx_video_diags WHERE ts <= DATE_SUB(NOW(), INTERVAL 24 hour);
+    DELETE FROM ebdb.screenshots WHERE ts <= DATE_SUB(NOW(), INTERVAL 24 hour);
+    DELETE FROM ebdb.sessions WHERE ts <= DATE_SUB(NOW(), INTERVAL 24 hour);
+
+CREATE EVENT `purge_speedtest`
+ON SCHEDULE EVERY 24 HOUR
+DO
+    DELETE FROM ebdb.speedtest WHERE dt <= DATE_SUB(NOW(), INTERVAL 1 month);
+
+CREATE EVENT `purge_iotest`
+ON SCHEDULE EVERY 24 HOUR
+DO
+    DELETE FROM ebdb.iotest WHERE dt <= DATE_SUB(NOW(), INTERVAL 1 month);
+
+SHOW EVENTS;

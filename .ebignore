@@ -1,0 +1,13 @@
+__pycache__
+.DS_Store
+*.pyc
+country-flags
+ddwrt-mypage
+id_rsa**
+venv**
+vpnprofiles
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

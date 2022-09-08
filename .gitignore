@@ -127,3 +127,23 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# macOS
+.DS_Store
+
+# Unzoner
+country-flags
+ddwrt-mypage
+id_rsa**
+vpnprofiles
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.ebextensions/environment.config
+
+# git-secret
+.gitsecret/keys/random_seed
+!*.secret
+.balena/secrets/env

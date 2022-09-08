@@ -1,0 +1,961 @@
+{
+  "IT": {
+    "google": {
+      "default": false,
+      "DOMAIN": "google.it"
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com,apple.it"
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.com,amazon.it,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "raiplay": {
+      "default": false,
+      "DOMAIN": "rai.it,raiplay.it"
+    },
+    "sky": {
+      "default": false,
+      "DOMAIN": "sky.com,sky.it"
+    },
+    "mediasetpremium": {
+      "default": false,
+      "DOMAIN": "mediasetpremium.it"
+    },
+    "cielotv": {
+      "default": false,
+      "DOMAIN": "cielotv.it"
+    },
+    "dmax": {
+      "default": false,
+      "DOMAIN": "dmax.it"
+    },
+    "infinitytv": {
+      "default": false,
+      "DOMAIN": "infinitytv.it"
+    },
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com"
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    }
+  },
+  "ES": {
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "hbo": {
+      "default": false,
+      "DOMAIN": "hbo.com,hbogo.com,hbonow.com,hbomax.com,hboespana.com,hbonordic.com",
+      "ASN": ""
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.es,google.cat",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com,apple.es",
+      "ASN": ""
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.es,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    }
+  },
+  "TR": {
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.com.tr",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com",
+      "ASN": ""
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    },
+    "blutv": {
+      "default": false,
+      "DOMAIN": "blutv.com.tr",
+      "ASN": ""
+    },
+    "tivibu": {
+      "default": false,
+      "DOMAIN": "tivibu.com.tr,ttnet.com.tr",
+      "ASN": ""
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "turkcelltv+": {
+      "default": false,
+      "DOMAIN": "turkcelltv.com.tr",
+      "ASN": ""
+    },
+    "dsmartgo": {
+      "default": false,
+      "DOMAIN": "dsmartgo.com.tr",
+      "ASN": ""
+    },
+    "digiturk": {
+      "default": false,
+      "DOMAIN": "digiturkplay.com.tr,ercdn.com",
+      "ASN": ""
+    },
+    "digiturkdilediginyerde": {
+      "default": false,
+      "DOMAIN": "digiturkdilediginyerde.com.tr",
+      "ASN": ""
+    }
+  },
+  "GB": {
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "channel4": {
+      "default": false,
+      "DOMAIN": "channel4.com,c4assets.com",
+      "ASN": ""
+    },
+    "itv": {
+      "default": false,
+      "DOMAIN": "itv.com",
+      "ASN": ""
+    },
+    "national-lottery": {
+      "default": false,
+      "DOMAIN": "national-lottery.co.uk",
+      "ASN": ""
+    },
+    "bwin.com": {
+      "default": false,
+      "DOMAIN": "bwin.com",
+      "ASN": ""
+    },
+    "bet365.com": {
+      "default": false,
+      "DOMAIN": "bet365.com",
+      "ASN": ""
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.co.uk",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com",
+      "ASN": ""
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.co.uk,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "iplayer": {
+      "default": false,
+      "DOMAIN": "bbc.co.uk",
+      "ASN": "AS2818"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    }
+  },
+  "IN": {
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "hotstar": {
+      "default": false,
+      "DOMAIN": "hotstar.com"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    }
+  },
+  "US": {
+    "sundance": {
+      "default": false,
+      "DOMAIN": "sundancenow.com,boltdns.net"
+    },
+    "peacock": {
+      "default": false,
+      "DOMAIN": "peacocktv.com"
+    },
+    "disney+": {
+      "default": false,
+      "DOMAIN": "bamgrid.com,dssott.com,go.com,disney-plus.net,disneyplus.com,disney.com,disneyjunior.com"
+    },
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "MLB.tv": {
+      "default": false,
+      "DOMAIN": "mlb.tv,mlb.com,mlbstatic.com,milb.com,mlbam.net,bamstatic.com,bamgrid.com,bamnetworks.com,livefyre.com,krxd.net,icanhazip.com,ticketing-client.com",
+      "ASN": ""
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.com",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com",
+      "ASN": ""
+    },
+    "crunchyroll": {
+      "default": false,
+      "DOMAIN": "crunchyroll.com"
+    },
+    "fubo": {
+      "default": false,
+      "DOMAIN": "fubo.tv"
+    },
+    "britbox": {
+      "default": false,
+      "DOMAIN": "britbox.com"
+    },
+    "showtime": {
+      "default": false,
+      "DOMAIN": "showtimeanytime.com,sho.com,cbsi.com,showtime.com"
+    },
+    "directv": {
+      "default": false,
+      "DOMAIN": "directv.com"
+    },
+    "spectrum": {
+      "default": false,
+      "DOMAIN": "spectrum.net,twc.net,timewarnercable.com"
+    },
+    "xfinity": {
+      "default": false,
+      "DOMAIN": "xfinity.net,comcast.com,comcast.net,xcal.tv"
+    },
+    "starz": {
+      "default": false,
+      "DOMAIN": "starz.com"
+    },
+    "smithsonianchannel": {
+      "default": false,
+      "DOMAIN": "smithsonianchannel.com"
+    },
+    "sciencechannelgo": {
+      "default": false,
+      "DOMAIN": "sciencechannelgo.com"
+    },
+    "nationalgeographic": {
+      "default": false,
+      "DOMAIN": "natgeotv.com,nationalgeographic.com"
+    },
+    "mylifetime": {
+      "default": false,
+      "DOMAIN": "mylifetime.com"
+    },
+    "investigationdiscovery": {
+      "default": false,
+      "DOMAIN": "investigationdiscovery.com,investigationdiscoverygo.com"
+    },
+    "history": {
+      "default": false,
+      "DOMAIN": "history.com"
+    },
+    "fxnetworks": {
+      "default": false,
+      "DOMAIN": "fxnetworks.com"
+    },
+    "diynetwork": {
+      "default": false,
+      "DOMAIN": "diynetwork.com"
+    },
+    "discoverygo": {
+      "default": false,
+      "DOMAIN": "discoverygo.com"
+    },
+    "animalplanetgo": {
+      "default": false,
+      "DOMAIN": "animalplanetgo.com"
+    },
+    "tntdrama": {
+      "default": false,
+      "DOMAIN": "tntdrama.com,turner.com"
+    },
+    "tlcgo": {
+      "default": false,
+      "DOMAIN": "tlcgo.com"
+    },
+    "cwtv": {
+      "default": false,
+      "DOMAIN": "cwtv.com"
+    },
+    "tbs": {
+      "default": false,
+      "DOMAIN": "tbs.com,turner.com"
+    },
+    "aetv": {
+      "default": false,
+      "DOMAIN": "aetv.com,aetnd.com"
+    },
+    "hbo": {
+      "default": false,
+      "DOMAIN": "hbo.com,hbogo.com,hbonow.com,hbomax.com,hboespana.com,hbonordic.com"
+    },
+    "abc": {
+      "default": false,
+      "DOMAIN": "abc.com,uplynk.com,go.com"
+    },
+    "warnerbros": {
+      "default": false,
+      "DOMAIN": "warnerbros.com"
+    },
+    "sling": {
+      "default": false,
+      "DOMAIN": "sling.com,movetv.com,movenetworks.com,bitmovin.com",
+      "ASN": "AS35873,AS13996"
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    },
+    "nbcuni": {
+      "default": false,
+      "DOMAIN": "nbcuni.com"
+    },
+    "amc": {
+      "default": false,
+      "DOMAIN": "amctv.com"
+    },
+    "fox": {
+      "default": false,
+      "DOMAIN": "fox.com"
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.com,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "youtube": {
+      "default": false,
+      "DOMAIN": "youtube.com,googlevideo.com"
+    },
+    "hulu": {
+      "default": false,
+      "DOMAIN": "hulu.com"
+    },
+    "cbs": {
+      "default": false,
+      "DOMAIN": "cbs.com"
+    },
+    "vudu": {
+      "default": false,
+      "DOMAIN": "vudu.com"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "brightcove": {
+      "default": false,
+      "DOMAIN": "brightcove.com",
+      "ASN": ""
+    },
+    "discovery": {
+      "default": false,
+      "DOMAIN": "discovery.com",
+      "ASN": ""
+    },
+    "theplatform": {
+      "default": false,
+      "DOMAIN": "theplatform.com",
+      "ASN": ""
+    },
+    "go": {
+      "default": false,
+      "DOMAIN": "go.com,uplynk.com",
+      "ASN": ""
+    },
+    "pandora": {
+      "default": false,
+      "DOMAIN": "pandora.com"
+    },
+    "nbc": {
+      "default": false,
+      "DOMAIN": "nbc.com"
+    },
+    "pbs": {
+      "default": false,
+      "DOMAIN": "pbs.org,pbskids.org"
+    }
+  },
+  "CA": {
+    "sundance": {
+      "default": false,
+      "DOMAIN": "sundancenow.com,boltdns.net"
+    },
+    "ufcfightpass": {
+      "default": false,
+      "DOMAIN": "ufcfightpass.com"
+    },
+    "disney+": {
+      "default": false,
+      "DOMAIN": "bamgrid.com,dssott.com,go.com,disney-plus.net,disneyplus.com,disney.com,disneyjunior.com"
+    },
+    "dazn": {
+      "default": false,
+      "DOMAIN": "dazn.com,dazn-api.com,dazndn.com,indazn.com"
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.ca",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com",
+      "ASN": ""
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.ca,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    }
+  },
+  "UM": {
+    "sundance": {
+      "default": false,
+      "DOMAIN": "sundancenow.com,boltdns.net"
+    },
+    "peacock": {
+      "default": false,
+      "DOMAIN": "peacocktv.com"
+    },
+    "MLB.tv": {
+      "default": false,
+      "DOMAIN": "mlb.tv,mlb.com,mlbstatic.com,milb.com,mlbam.net,bamstatic.com,bamgrid.com,bamnetworks.com,livefyre.com,krxd.net,icanhazip.com,ticketing-client.com",
+      "ASN": ""
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.com",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com",
+      "ASN": ""
+    },
+    "crunchyroll": {
+      "default": false,
+      "DOMAIN": "crunchyroll.com"
+    },
+    "fubo": {
+      "default": false,
+      "DOMAIN": "fubo.tv"
+    },
+    "britbox": {
+      "default": false,
+      "DOMAIN": "britbox.com"
+    },
+    "showtime": {
+      "default": false,
+      "DOMAIN": "showtimeanytime.com,sho.com,cbsi.com,showtime.com"
+    },
+    "directv": {
+      "default": false,
+      "DOMAIN": "directv.com"
+    },
+    "spectrum": {
+      "default": false,
+      "DOMAIN": "spectrum.net,twc.net,timewarnercable.com"
+    },
+    "xfinity": {
+      "default": false,
+      "DOMAIN": "xfinity.net,comcast.com,comcast.net,xcal.tv"
+    },
+    "starz": {
+      "default": false,
+      "DOMAIN": "starz.com"
+    },
+    "smithsonianchannel": {
+      "default": false,
+      "DOMAIN": "smithsonianchannel.com"
+    },
+    "sciencechannelgo": {
+      "default": false,
+      "DOMAIN": "sciencechannelgo.com"
+    },
+    "nationalgeographic": {
+      "default": false,
+      "DOMAIN": "natgeotv.com,nationalgeographic.com"
+    },
+    "mylifetime": {
+      "default": false,
+      "DOMAIN": "mylifetime.com"
+    },
+    "investigationdiscovery": {
+      "default": false,
+      "DOMAIN": "investigationdiscovery.com,investigationdiscoverygo.com"
+    },
+    "history": {
+      "default": false,
+      "DOMAIN": "history.com"
+    },
+    "fxnetworks": {
+      "default": false,
+      "DOMAIN": "fxnetworks.com"
+    },
+    "diynetwork": {
+      "default": false,
+      "DOMAIN": "diynetwork.com"
+    },
+    "discoverygo": {
+      "default": false,
+      "DOMAIN": "discoverygo.com"
+    },
+    "animalplanetgo": {
+      "default": false,
+      "DOMAIN": "animalplanetgo.com"
+    },
+    "tntdrama": {
+      "default": false,
+      "DOMAIN": "tntdrama.com,turner.com"
+    },
+    "tlcgo": {
+      "default": false,
+      "DOMAIN": "tlcgo.com"
+    },
+    "cwtv": {
+      "default": false,
+      "DOMAIN": "cwtv.com"
+    },
+    "tbs": {
+      "default": false,
+      "DOMAIN": "tbs.com,turner.com"
+    },
+    "aetv": {
+      "default": false,
+      "DOMAIN": "aetv.com,aetnd.com"
+    },
+    "hbo": {
+      "default": false,
+      "DOMAIN": "hbo.com,hbogo.com,hbonow.com,hbomax.com,hboespana.com,hbonordic.com"
+    },
+    "abc": {
+      "default": false,
+      "DOMAIN": "abc.com,uplynk.com,go.com"
+    },
+    "warnerbros": {
+      "default": false,
+      "DOMAIN": "warnerbros.com"
+    },
+    "sling": {
+      "default": false,
+      "DOMAIN": "sling.com,movetv.com,movenetworks.com,bitmovin.com",
+      "ASN": "AS35873,AS13996"
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    },
+    "nbcuni": {
+      "default": false,
+      "DOMAIN": "nbcuni.com"
+    },
+    "amc": {
+      "default": false,
+      "DOMAIN": "amctv.com"
+    },
+    "fox": {
+      "default": false,
+      "DOMAIN": "fox.com"
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.com,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "youtube": {
+      "default": false,
+      "DOMAIN": "youtube.com,googlevideo.com"
+    },
+    "hulu": {
+      "default": false,
+      "DOMAIN": "hulu.com"
+    },
+    "cbs": {
+      "default": false,
+      "DOMAIN": "cbs.com"
+    },
+    "vudu": {
+      "default": false,
+      "DOMAIN": "vudu.com"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "brightcove": {
+      "default": false,
+      "DOMAIN": "brightcove.com",
+      "ASN": ""
+    },
+    "discovery": {
+      "default": false,
+      "DOMAIN": "discovery.com",
+      "ASN": ""
+    },
+    "theplatform": {
+      "default": false,
+      "DOMAIN": "theplatform.com",
+      "ASN": ""
+    },
+    "go": {
+      "default": false,
+      "DOMAIN": "go.com,uplynk.com",
+      "ASN": ""
+    },
+    "pandora": {
+      "default": false,
+      "DOMAIN": "pandora.com"
+    },
+    "nbc": {
+      "default": false,
+      "DOMAIN": "nbc.com"
+    },
+    "pbs": {
+      "default": false,
+      "DOMAIN": "pbs.org,pbskids.org"
+    }
+  },
+  "IO": {
+    "channel4": {
+      "default": false,
+      "DOMAIN": "channel4.com",
+      "ASN": ""
+    },
+    "national-lottery": {
+      "default": false,
+      "DOMAIN": "national-lottery.co.uk",
+      "ASN": ""
+    },
+    "bwin.com": {
+      "default": false,
+      "DOMAIN": "bwin.com",
+      "ASN": ""
+    },
+    "bet365.com": {
+      "default": false,
+      "DOMAIN": "bet365.com",
+      "ASN": ""
+    },
+    "google": {
+      "default": false,
+      "DOMAIN": "google.co.uk",
+      "ASN": ""
+    },
+    "apple": {
+      "default": false,
+      "DOMAIN": "apple.com",
+      "ASN": ""
+    },
+    "amazon": {
+      "default": false,
+      "DOMAIN": "amazon.co.uk,amazonvideo.com,aiv-cdn.net,aiv-delivery.net,primevideo.com"
+    },
+    "iplayer": {
+      "default": false,
+      "DOMAIN": "bbc.co.uk",
+      "ASN": "AS2818"
+    },
+    "common": {
+      "default": true,
+      "DOMAIN": "ipinfo.io,ifconfig.co,ipleak.net,ip2location.com,omtrdc.net,conviva.com,geolocation.onetrust.com",
+      "ASN": ""
+    },
+    "akamai": {
+      "default": false,
+      "DOMAIN": "akadns.net,akam.net,akamai.com,akamai.net,akamaiedge.net,akamaihd.net,akamaistream.net,akamaitech.net,akamaitechnologies.com,akamaitechnologies.fr,akamaized.net,edgekey.net,edgesuite.net,srip.net",
+      "ASN": ""
+    },
+    "level3": {
+      "default": false,
+      "DOMAIN": "level3.net,footprint.net",
+      "ASN": ""
+    },
+    "limelight": {
+      "default": false,
+      "DOMAIN": "llnwd.net",
+      "ASN": ""
+    },
+    "edgecast": {
+      "default": false,
+      "DOMAIN": "edgecastcdn.net",
+      "ASN": ""
+    },
+    "cloudfront": {
+      "default": false,
+      "DOMAIN": "cloudfront.net",
+      "ASN": ""
+    },
+    "netflix": {
+      "default": false,
+      "DOMAIN": "netflix.com,nflxvideo.net,nflxso.net",
+      "ASN": "AS2906"
+    }
+  }
+}

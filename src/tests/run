@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+[[ $VERBOSE =~ true|True|On|on|1 ]] && set -x
+
+set -aeu
+
+API_SECRET=${API_SECRET:-$(openssl rand -hex 16)}
+BLACKBOX_DATA=${BLACKBOX_DATA:-src/blackbox.json}
+COUNTRY_DATA=${COUNTRY_DATA:-src/alpha.json}
+DEBUG=${DEBUG:-0}
+DEBUGGER=${DEBUGGER:-1}	# disable SSL redirect
+RUN_TESTS=${RUN_TESTS:-1}
+
+function finish() {
+    rm -rf src/tests/venv ddwrt-mypage vpnprofiles country-flags
+}
+trap finish EXIT
+
+function install_venv() {
+    python3.9 -m venv src/tests/venv
+
+    PATH="$(pwd)/src/tests/venv/bin:${PATH}"
+
+    pip install --upgrade pip setuptools wheel
+    pip install --upgrade -r requirements.txt
+    pip install --upgrade -r src/tests/requirements.txt
+}
+
+function run_tests() {
+	install_venv
+
+    nosetests --verbosity=2 "$@"
+}
+
+# run unit tests
+if [[ $RUN_TESTS == 1 ]]; then
+    run_tests "$@"
+fi
