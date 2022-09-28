@@ -11,11 +11,7 @@ COUNTRY_FLAGS_REPO = os.getenv(
 	'https://github.com/hjnilsson/country-flags.git'
 )
 
-COUNTRY_FLAGS_TAG = os.getenv(
-	'COUNTRY_FLAGS_TAG',
-	'png100px'
-)
-
+COUNTRY_FLAGS_TAG = os.getenv('COUNTRY_FLAGS_TAG', 'main')
 TARGET_COUNTRY = os.getenv('TARGET_COUNTRY', 'United States')
 GEOIP_URL = os.getenv('GEOIP_URL', 'http://api.ipstack.com')
 GEOIP_API_KEY = os.getenv('GEOIP_API_KEY', None)
