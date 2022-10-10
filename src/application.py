@@ -83,11 +83,11 @@ application.debug = DEBUGGER
 
 sslify = SSLify(
     application, skips=[
-        'api/v{0}/ping'.format(API_VERSION),
+        'api/v{}/ping'.format(API_VERSION),
         'status',
         'ddwrt',
-        'api/v{0}/ddwrt'.format(API_VERSION),
-        'api/v{0}/vpnprovider'.format(API_VERSION)
+        'api/v{}/ddwrt'.format(API_VERSION),
+        'api/v{}/vpnprovider'.format(API_VERSION)
     ]
 )
 
@@ -927,7 +927,7 @@ def _blockcypher_webhook_receive():
 ##################
 # resin.io views #
 ##################
-@application.route('/api/v{0}/devices/purge/<string:app_id>'.format(API_VERSION), methods=['GET'])
+@application.route('/api/v{}/devices/purge/<string:app_id>'.format(API_VERSION), methods=['GET'])
 @requires_auth
 def _purge_expired_devices(app_id):
     try:
@@ -1377,7 +1377,7 @@ FROM device
 WHERE type=4
 AND proto=:proto
 AND SUBSTRING(guid,1,32)=:guid
-AND dt >= DATE_SUB(NOW(), INTERVAL %d second)
+AND dt >= DATE_SUB(NOW(), INTERVAL {} second)
 ORDER BY conns ASC
 LIMIT 1'''.format(STALE_NODE_THSHLD)
 
@@ -1388,8 +1388,7 @@ LIMIT 1'''.format(STALE_NODE_THSHLD)
                 'guid': guid[:32]
             }
         ).fetchall()
-        if len(result) > 0:
-            node = result[0][0]
+        if len(result) > 0: node = result[0][0]
     except Exception as e:
         session.rollback()
         print(repr(e))
@@ -1438,7 +1437,7 @@ def _get_test_table(table):
     try:
         sql = '''
 SELECT *
-FROM {0}
+FROM {}
 ORDER BY id
 DESC'''.format(table)
 
@@ -1481,7 +1480,7 @@ LIMIT 1'''
         abort(NOT_FOUND)
 
 
-@application.route('/api/v{0}/screenshot/tags/<int:limit>'.format(API_VERSION))
+@application.route('/api/v{}/screenshot/tags/<int:limit>'.format(API_VERSION))
 @requires_auth
 def _get_test_tag_screenshots(limit):
     result = None
@@ -1811,7 +1810,7 @@ def _get_vpn_profile_by(provider, group, name):
 
 
 @application.route(
-    '/api/v{0}/ddwrt/group/<string:group>/provider/<string:provider>/install'.format(API_VERSION), methods=['GET', 'HEAD']
+    '/api/v{}/ddwrt/group/<string:group>/provider/<string:provider>/install'.format(API_VERSION), methods=['GET', 'HEAD']
 )
 @application.route(
     '/ddwrt', methods=['GET', 'HEAD'],
