@@ -670,11 +670,11 @@ def purge_resin_devices(guid=None, app_id=None):
                 ))
 
             device_expired = False
-			if (not recently_connected
-				and paypal_subscription is None
-				and (expired_bitcoin_payment is None or expired_bitcoin_payment)
-				and (device_type is not None and device_type in ['2', '4', '5'])
-				and not guid in PURGE_WHITELIST.split(',')
+            if (not recently_connected
+                and paypal_subscription is None
+                and (expired_bitcoin_payment is None or expired_bitcoin_payment)
+                and (device_type is not None and device_type in ['2', '4', '5'])
+                and not guid in PURGE_WHITELIST.split(',')
             ):
                 device_dict['device'] = device
                 device_dict['guid'] =  guid
