@@ -112,7 +112,7 @@ def get_resin_devices(app_id=RESIN_APP_ID):
             'Content-Type': 'application/json'
         }
 
-        endpoint = '{}/v6/device?$filter=belongs_to__application%20in%20({})&$expand=is_of__device_type($select=slug,name)&$select=uuid,id,belongs_to__application,location,status,is_online,ip_address,supervisor_version,os_version,os_variant'.format(
+        endpoint = '{}/v6/device?$filter=belongs_to__application%20in%20({})&$expand=is_of__device_type($select=slug,name)&$select=uuid,id,belongs_to__application,location,status,is_online,ip_address,supervisor_version,os_version,os_variant,last_connectivity_event'.format(
             RESN_API_HOST,
             app_id
         )
@@ -601,10 +601,6 @@ def create_update_resin_device_env(guid=None, name=None, value=None):
 
 def purge_resin_devices(guid=None, app_id=None):
     if not app_id and not guid: return
-    filter_states = [
-        'ResinOS: update successful, rebooting...',
-        'Update successful, rebooting'
-    ]
     try:
         guid = guid.decode('utf-8')
     except:
@@ -625,29 +621,11 @@ def purge_resin_devices(guid=None, app_id=None):
                 last_connectivity_event = utcnow
 
             try:
-                download_progress = device['download_progress']
-                assert download_progress
-            except:
-                download_progress = None
-
-            try:
-                provisioning_progress = device['provisioning_progress']
-                assert provisioning_progress
-            except:
-                provisioning_progress = None
-
-            try:
-                provisioning_state = device['provisioning_state']
-                assert provisioning_state
-            except:
-                provisioning_state = None
-
-            try:
-                expired = datetime.strptime(
+                recently_connected = datetime.strptime(
                     last_connectivity_event, '%Y-%m-%dT%H:%M:%S.%fZ'
-                ) + timedelta(days=MAX_LAST_SEEN_DAYS) < utcnow
+                ) + timedelta(days=MAX_LAST_SEEN_DAYS) > utcnow
             except:
-                expired = False
+                not_recently_connected = False
 
             try:
                 device_type = get_resin_device_env_by_name(
@@ -682,12 +660,9 @@ def purge_resin_devices(guid=None, app_id=None):
                 expired_bitcoin_payment = None
 
             if DEBUG:
-                print('last_connectivity_event={} download_progress={} provisioning_progress={} provisioning_state={} expired={} device_type={} webhook_id={} paypal_subscription={} expired_bitcoin_payment={}'.format(
+                print('recently_connected={} last_connectivity_event={} device_type={} webhook_id={} paypal_subscription={} expired_bitcoin_payment={}'.format(
+                    recently_connected,
                     last_connectivity_event,
-                    download_progress,
-                    provisioning_progress,
-                    provisioning_state,
-                    expired,
                     device_type,
                     webhook_id,
                     paypal_subscription,
@@ -695,22 +670,21 @@ def purge_resin_devices(guid=None, app_id=None):
                 ))
 
             device_expired = False
-            if (not device['is_online'] and expired)\
-               and (not download_progress or download_progress in [3, 66])\
-               and (not provisioning_progress or provisioning_progress in [100])\
-               and (not provisioning_state or provisioning_state in filter_states)\
-               and paypal_subscription is None\
-               and (expired_bitcoin_payment is None or expired_bitcoin_payment)\
-               and (device_type is not None and device_type in ['2', '4', '5'])\
-               and not guid in PURGE_WHITELIST.split(','):
+			if (not recently_connected
+				and paypal_subscription is None
+				and (expired_bitcoin_payment is None or expired_bitcoin_payment)
+				and (device_type is not None and device_type in ['2', '4', '5'])
+				and not guid in PURGE_WHITELIST.split(',')
+            ):
                 device_dict['device'] = device
                 device_dict['guid'] =  guid
                 device_dict['webhook_id'] = webhook_id
                 device_dict['device_type'] = device_type
                 device_dict['paypal_subscription'] = paypal_subscription
                 device_dict['expired_bitcoin_payment'] = expired_bitcoin_payment
-                device_dict['expired_dt'] = expired
+                device_dict['last_connectivity_event'] = last_connectivity_event
                 device_dict['is_expired'] = True
+                device_dict['recently_connected'] = recently_connected
                 device_dict['purged'] = True and PURGE
                 expired_devices.append(device_dict)
         except Exception as e:
