@@ -1,26 +1,35 @@
 # -*- coding: utf-8 -*-
 
-from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy import (
-    Column, Integer, String, Boolean, DateTime, create_engine, BigInteger
+    BigInteger,
+    Boolean,
+    Column,
+    create_engine,
+    DateTime,
+    event,
+    exc,
+    Integer,
+    select,
+    String
 )
 
-from sqlalchemy.sql import func
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import exc, event, select
+from sqlalchemy.sql import func
 
 from config import (
     SQLALCHEMY_DATABASE_URI,
     SQLALCHEMY_POOL_RECYCLE
 )
 
-
 Base = declarative_base()
+
 engine = create_engine(
     SQLALCHEMY_DATABASE_URI,
-    pool_recycle=SQLALCHEMY_POOL_RECYCLE
+    pool_recycle=SQLALCHEMY_POOL_RECYCLE,
+    pool_pre_ping=True
 )
+
 session = scoped_session(
     sessionmaker(
         autocommit=False,
@@ -28,43 +37,8 @@ session = scoped_session(
         bind=engine
     )
 )
+
 session.expire_on_commit = False
-
-
-@event.listens_for(engine, 'engine_connect')
-def ping_connection(connection, branch):
-    if branch:
-        # "branch" refers to a sub-connection of a connection,
-        # we don't want to bother pinging on these.
-        return
-
-    # turn off "close with result".  This flag is only used with
-    # "connectionless" execution, otherwise will be False in any case
-    save_should_close_with_result = connection.should_close_with_result
-    connection.should_close_with_result = False
-
-    try:
-        # run a SELECT 1.   use a core select() so that
-        # the SELECT of a scalar value without a table is
-        # appropriately formatted for the backend
-        connection.scalar(select([1]))
-    except exc.DBAPIError as err:
-        # catch SQLAlchemy's DBAPIError, which is a wrapper
-        # for the DBAPI's exception.  It includes a .connection_invalidated
-        # attribute which specifies if this connection is a "disconnect"
-        # condition, which is based on inspection of the original exception
-        # by the dialect in use.
-        if err.connection_invalidated:
-            # run the same SELECT again - the connection will re-validate
-            # itself and establish a new connection.  The disconnect detection
-            # here also causes the whole connection pool to be invalidated
-            # so that all stale connections are discarded.
-            connection.scalar(select([1]))
-        else:
-            raise
-    finally:
-        # restore "close with result"
-        connection.should_close_with_result = save_should_close_with_result
 
 
 class Device(Base):
@@ -92,10 +66,24 @@ class Device(Base):
     upnp = Column(Integer, index=True, unique=False)
     hostapd = Column(Integer, index=True, unique=False)
 
-    
     def __init__(
-        self, dt, guid, type, proto, ip, country, city, conns, weight, bytesin,
-        bytesout, status, cipher, auth, upnp, hostapd
+        self,
+        dt,
+        guid,
+        type,
+        proto,
+        ip,
+        country,
+        city,
+        conns,
+        weight,
+        bytesin,
+        bytesout,
+        status,
+        cipher,
+        auth,
+        upnp,
+        hostapd
     ):
         self.dt = dt
         self.guid = guid
@@ -115,20 +103,6 @@ class Device(Base):
         self.hostapd = hostapd
 
 
-    def __repr__(
-        self, dt, guid, type, proto, ip, country, city, conns, weight, bytesin,
-        bytesout, status
-    ):
-        return(
-            '<Device {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}>'.format(
-                self.id, self.dt, self.guid, self.type, self.proto, self.ip,
-                self.country, self.city, self.conns, self.weight, self.bytesin,
-                self.bytesout, self.status, self.cipher, self.auth, self.upnp,
-                self.hostapd
-            )
-        )
-
-
 class Speedtest(Base):
     __tablename__ = 'speedtest'
     id = Column(Integer, primary_key=True)
@@ -143,21 +117,12 @@ class Speedtest(Base):
     down = Column(String(255), index=False, unique=False)
     up = Column(String(255), index=False, unique=False)
 
-    
     def __init__(self, dt, guid, status, down, up):
         self.dt = dt
         self.guid = guid
         self.status = status
         self.down = down
         self.up = up 
-
-
-    def __repr__(self, dt, guid, status, down, up):
-        return(
-            '<Speedtest {} {} {} {} {}'.format(
-                self.id, self.dt, self.guid, self.status, self.down, self.up
-            )
-        )
 
 
 class IOtest(Base):
@@ -174,26 +139,12 @@ class IOtest(Base):
     test = Column(Integer, index=True, unique=False)
     result = Column(String(255), index=False, unique=False)
 
-    
     def __init__(self, dt, guid, status, test, result):
         self.dt = dt
         self.guid = guid
         self.status = status
         self.test = test
         self.result = result
-
-
-    def __repr__(self, dt, guid, status, test, result):
-        return(
-            '<IOTest {} {} {} {} {}'.format(
-                self.id,
-                self.dt,
-                self.guid,
-                self.status,
-                self.test,
-                self.result
-                )
-            )
 
 
 class Sessions(Base):
@@ -218,7 +169,6 @@ class Sessions(Base):
     attempt = Column(Integer, index=False, unique=False)
     seconds = Column(Integer, index=False, unique=False)
 
-    
     def __init__(
         self, ts, trackingid, provider, email, password, profile,
         switch_profile, titleid, host, tries, attempt, seconds
@@ -238,19 +188,6 @@ class Sessions(Base):
         self.seconds = seconds
 
 
-    def __repr__(
-        self, ts, trackingid, provider, email, password, profile,
-        switch_profile, titleid, host, tag, tries, attempt, seconds
-    ):
-        return(
-            '<Sessions {} {} {} {} {} {} {} {} {} {} {} {}>'.format(
-                self.id, self.ts, self.trackingid, self.provider, self.email,
-                self.password, self.profile, self.switch_profile, self.titleid,
-                self.host, self.tag, self.tries, self.attempt, self.seconds
-            )
-        )
-
-
 class Errors(Base):
     __tablename__ = 'errors'
     id = Column(Integer, primary_key=True)
@@ -267,7 +204,6 @@ class Errors(Base):
     cdata = Column(String(50), index=False, unique=False)
     url = Column(String(255), index=False, unique=False)
 
-    
     def __init__(self, ts, session_id, exception, mdelay, mtries, cdata, url):
         self.ts = ts
         self.session_id = session_id
@@ -276,15 +212,6 @@ class Errors(Base):
         self.mtries = mtries
         self.cdata = cdata
         self.url = url
-
-
-    def __repr__(self, ts, session_id, exception, mdelay, mtries, cdata, url):
-        return(
-            '<Errors {} {} {} {} {} {} {} {}>'.format(
-                self.id, self.ts, self.session_id, self.exception, self.mdelay,
-                self.mtries, self.cdata, self.url
-            )
-        )
 
 
 class Screenshots(Base):
@@ -299,21 +226,12 @@ class Screenshots(Base):
     session_id = Column(Integer, index=True, unique=False)
     error_id = Column(Integer, index=True, unique=False)
     url = Column(String(255), index=False, unique=False)
-
     
     def __init__(self, ts, session_id, error_id, url):
         self.ts = ts
         self.session_id = session_id
         self.error_id = error_id
         self.url = url
-
-
-    def __repr__(self, ts, session_id, error_id, url):
-        return(
-            '<Screenshots {} {} {} {} {}>'.format(
-                self.id, self.ts, self.session_id, self.error_id, self.url
-            )
-        )
 
 
 class NetflixVideoDiags(Base):
@@ -372,7 +290,6 @@ class NetflixVideoDiags(Base):
     KeyStatus = Column(String(255), index=True, unique=False)
     AudioTags = Column(String(255), index=True, unique=False)
     VideoTags = Column(String(255), index=True, unique=False)
-
 
     def __init__(
         self,
@@ -473,59 +390,3 @@ class NetflixVideoDiags(Base):
         self.KeyStatus = KeyStatus
         self.AudioTags = AudioTags
         self.VideoTags = VideoTags
-
-
-    def __repr__(self):
-        return(
-            '<nflx_video_diags {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}>'.format(
-                self.id,
-                self.ts,
-                self.session_id,
-                self.time_remaining,
-                self.AudioTrack,
-                self.Bandwidth_normalized_,
-                self.Bufferingbitrate_a_v_,
-                self.Bufferingstate,
-                self.BuffersizeinBytes,
-                self.BuffersizeinBytes_a_v_,
-                self.BuffersizeinSeconds_a_v_,
-                self.CurrentCDN_a_v_,
-                self.PBCID,
-                self.CurrentDroppedFrames,
-                self.DFR,
-                self.Duration,
-                self.Esn,
-                self.Framerate,
-                self.Latency,
-                self.MainThreadstall_sec,
-                self.MaxSustainableVideoBitrate,
-                self.MovieId,
-                self.PlayerDuration,
-                self.Playerstate,
-                self.Playing_Bufferingvmaf,
-                self.Playingbitrate_a_v_,
-                self.Position,
-                self.Renderingstate,
-                self.Throughput,
-                self.TimedTextTrack,
-                self.TotalCorruptedFrames,
-                self.TotalDroppedFrames,
-                self.TotalFrameDelay,
-                self.TotalFrames,
-                self.TrackingId,
-                self.UserAgent,
-                self.Version,
-                self.VideoDiag,
-                self.VideoTrack,
-                self.Volume,
-                self.WillRebuffer,
-                self.Xid,
-                self.SegmentPosition,
-                self.Segment,
-                self.HDRsupport,
-                self.KeySystem,
-                self.KeyStatus,
-                self.AudioTags,
-                self.VideoTags
-            )
-        )

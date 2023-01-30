@@ -17,7 +17,8 @@ from glob import glob
 from inspect import stack
 from flask_sslify import SSLify
 from datetime import datetime, timedelta
-from sqlalchemy.sql import func, update
+from sqlalchemy.sql import func, update, text
+
 from functools import wraps
 from traceback import print_exc
 from werkzeug.serving import WSGIRequestHandler
@@ -31,7 +32,13 @@ except ImportError:
     from io import BytesIO
 
 from flask import (
-    Flask, Response, jsonify, abort, request, redirect, make_response
+    abort,
+    Flask,
+    jsonify,
+    make_response,
+    redirect,
+    request,
+    Response
 )
 
 try:
@@ -158,10 +165,6 @@ def add_cache_control_max_age_1hr(f):
             'Cache-Control': 'max-age=3600'
         }
     )(f)
-
-
-def get_results_from_cursor(cursor):
-    return cursor.fetchall()
 
 
 @application.route('/api/v{}/ping'.format(API_VERSION))
@@ -1161,23 +1164,23 @@ ORDER BY id DESC
 LIMIT 1'''.format(STALE_NODE_THSHLD)
 
         result = session.execute(
-            sql, {
+            text(sql),
+            {
                 'guid': guid[:32],
                 'type': type,
                 'proto': proto
             }
-        ).fetchone()
+        )
     except Exception as e:
         session.rollback()
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
 
-    if not result:
-        abort(NOT_FOUND)
+    if result.rowcount > 0:
+        return json.dumps([dict(row._mapping) for row in result][0], default=str)
     else:
-        return jsonify(dict(zip(result.keys(), result)))
-
+        abort(NOT_FOUND)
 
 @application.route(
     '/api/v{}/device/<int:type>/<string:guid>/<int:proto>'.format(
@@ -1247,15 +1250,11 @@ def _put_device(type, guid, proto):
 
         session.add(result)
         session.commit()
+        return jsonify(result.guid)
     except Exception as e:
         session.rollback()
         print(repr(e))
         abort(BAD_REQUEST)
-
-    if not result or row2dict(result)['id'] == 'None':
-        abort(BAD_REQUEST)
-    else:
-        return jsonify(row2dict(result))
 
 
 def __get_nodes(limit=1, proto=4, country=TARGET_COUNTRY, client_ip='127.0.0.1'):
@@ -1295,7 +1294,7 @@ SELECT ip FROM
 LIMIT {}'''.format(STALE_NODE_THSHLD, limit)
 
         results = session.execute(
-            sql,
+            text(sql),
             {
                 'proto': proto,
                 'country': country
@@ -1382,7 +1381,7 @@ ORDER BY conns ASC
 LIMIT 1'''.format(STALE_NODE_THSHLD)
 
         result = session.execute(
-            sql,
+            text(sql),
             {
                 'proto': proto,
                 'guid': guid[:32]
@@ -1414,7 +1413,7 @@ AND proto=:proto
 ORDER BY dt ASC
 LIMIT 1'''
 
-        result = session.execute(sql, {'proto': family, 'ip': ip}).fetchall()
+        result = session.execute(text(sql), {'proto': family, 'ip': ip}).fetchall()
         if len(result) > 0:
             guid = result[0][0]
     except Exception as e:
@@ -1439,14 +1438,14 @@ def _get_test_table(table):
 SELECT *
 FROM {}
 ORDER BY id
-DESC'''.format(table)
+DESC
+LIMIT 1'''.format(table)
 
-        result = session.execute(sql).fetchone()
-        if result:
-            return jsonify(dict(zip(result.keys(), result)))
+        result = session.execute(text(sql))
+        if result.rowcount > 0:
+            return json.dumps([dict(row._mapping) for row in result][0], default=str)
         else:
             abort(NOT_FOUND)
-
     except Exception as e:
         session.rollback()
         print(repr(e))
@@ -1467,15 +1466,15 @@ AND ses.host=:alpha
 ORDER BY scr.id DESC
 LIMIT 1'''
 
-        result = session.execute(sql, {'alpha': alpha.upper()}).fetchone()
+        result = session.execute(text(sql), {'alpha': alpha.upper()})
     except Exception as e:
         session.rollback()
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
 
-    if result:
-        return jsonify(dict(zip(result.keys(), result)))
+    if result.rowcount > 0:
+        return json.dumps([dict(row._mapping) for row in result][0], default=str)
     else:
         abort(NOT_FOUND)
 
@@ -1499,14 +1498,14 @@ ORDER BY scr.ts DESC
 LIMIT :limit
 '''
 
-        result = session.execute(sql, {'limit': limit}).fetchall()
+        result = session.execute(text(sql), {'limit': limit})
     except Exception as e:
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
 
-    if result:
-        return jsonify([dict(row) for row in result])
+    if result.rowcount > 0:
+        return json.dumps([dict(row._mapping) for row in result][0], default=str)
     else:
         abort(NOT_FOUND)
 
@@ -1524,14 +1523,14 @@ AND status IS NULL
 ORDER BY dt DESC
 LIMIT 1'''
 
-        result = session.execute(sql, {'guid': guid[:32]}).fetchone()
+        result = session.execute(text(sql), {'guid': guid[:32]})
     except Exception as e:
         session.rollback()
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
 
-    if result:
+    if result.rowcount > 0:
         return ('', NO_CONTENT)
     else:
         abort(NOT_FOUND)
@@ -1550,15 +1549,15 @@ AND status IS NOT NULL
 ORDER BY dt DESC
 LIMIT 1'''
 
-        result = session.execute(sql, {'guid': guid[:32]}).fetchone()
+        result = session.execute(text(sql), {'guid': guid[:32]})
     except Exception as e:
         session.rollback()
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
 
-    if result:
-        return jsonify(dict(zip(result.keys(), result)))
+    if result.rowcount > 0:
+        return json.dumps([dict(row._mapping) for row in result][0], default=str)
     else:
         abort(NOT_FOUND)
 
@@ -1586,7 +1585,7 @@ AND status IS NULL
 ORDER BY dt ASC
 LIMIT 1'''
 
-        result = session.execute(sql, {'guid': guid[:32]}).fetchone()
+        result = session.execute(text(sql), {'guid': guid[:32]})
     except Exception as e:
         session.rollback()
         print(repr(e))
@@ -1594,17 +1593,21 @@ LIMIT 1'''
         abort(BAD_REQUEST)
 
     if DEBUG: print('{}: {}'.format(stack()[0][3], result))
-    if not result: abort(NOT_FOUND)
-    speedtest_id = dict(zip(result.keys(), result))['id']
+    if result.rowcount <= 0: abort(NOT_FOUND)
+    speedtest_id = [row for row in result.mappings()][0]['id']
 
     result = None
     try:
-        query = Speedtest.__table__.update().\
-                where(Speedtest.id==speedtest_id).\
-                where(Speedtest.guid==guid[:32]).\
-                values(down=data['down'], up=data['up'],
-                       status=data['status'], dt=func.now())
-
+        query = Speedtest.__table__.update().where(
+            Speedtest.id==speedtest_id
+        ).where(
+            Speedtest.guid==guid[:32]
+        ).values(
+            down=data['down'],
+            up=data['up'],
+            status=data['status'],
+            dt=func.now()
+        )
         result = session.execute(query)
         session.commit()
     except Exception as e:
@@ -1629,10 +1632,7 @@ def _queue_speedtest(guid):
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
 
-    if not result or row2dict(result)['id'] == 'None':
-        abort(BAD_REQUEST)
-    else:
-        return jsonify(row2dict(result))
+    return jsonify(guid)
 
 
 @application.route('/api/v{}/device/<int:type>/<string:guid>/<int:proto>/stats'.format(API_VERSION), methods=['GET', 'OPTIONS'])
@@ -1663,24 +1663,22 @@ AND proto=:proto
 AND type=:type
 ORDER BY dt;'''
 
-        cursor = session.execute(sql, {'guid': guid[:32],
-                                       'type': type,
-                                       'proto': proto})
+        results = session.execute(
+            text(sql),
+            {
+                'guid': guid[:32],
+                'type': type,
+                'proto': proto
+            }
+        )
+        if results.rowcount > 0:
+            return json.dumps([dict(row._mapping) for row in results], default=str)
+        else:
+            abort(NOT_FOUND)
     except Exception as e:
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
-
-    if not cursor:
-        abort(NOT_FOUND)
-    else:
-        results = get_results_from_cursor(cursor)
-        try:
-            results.pop(0)
-        except:
-            pass
-        return jsonify([dict(zip(r.keys(), r)) for r in results])
-
 
 
 ################
@@ -1798,8 +1796,7 @@ def _get_vpn_profile_by(provider, group, name):
     if request.method == 'OPTIONS': return ('', NO_CONTENT)
     result = None
     try:
-        result = generate_ovpn_profile(
-            provider=provider, group=group, name=name)
+        result = generate_ovpn_profile(provider=provider, group=group, name=name)
     except Exception as e:
         print(repr(e))
         if DEBUG: print_exc()
@@ -2101,7 +2098,7 @@ def _dequeue_iotest(guid):
             ORDER BY dt DESC
             LIMIT 1'''
         result = session.execute(
-            sql,
+            text(sql),
             {
                 'guid': guid[:32]
             }
@@ -2134,19 +2131,19 @@ def _get_iotest(test, guid):
             ORDER BY dt DESC
             LIMIT 1'''
         result = session.execute(
-            sql,
+            text(sql),
             {
                 'guid': guid[:32],
                 'test': test
             }
-        ).fetchone()
+        )
     except Exception as e:
         session.rollback()
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
-    if result:
-        return jsonify(dict(zip(result.keys(), result)))
+    if result.rowcount > 0:
+        return json.dumps([dict(row._mapping) for row in result][0], default=str)
     else:
         abort(NOT_FOUND)
 
@@ -2178,12 +2175,12 @@ def _update_iotest(guid):
             ORDER BY dt ASC
             LIMIT 1'''
         result = session.execute(
-            sql,
+            text(sql),
             {
                 'guid': guid[:32],
                 'test': data['test']
             }
-        ).fetchone()
+        )
     except Exception as e:
         session.rollback()
         print(repr(e))
@@ -2191,8 +2188,8 @@ def _update_iotest(guid):
         abort(BAD_REQUEST)
 
     if DEBUG: print('{}: {}'.format(stack()[0][3], result))
-    if not result: abort(NOT_FOUND)
-    test_id = dict(zip(result.keys(), result))['id']
+    if result.rowcount <= 0: abort(NOT_FOUND)
+    test_id = [row for row in result.mappings()][0]['id']
 
     result = None
     try:
@@ -2213,6 +2210,7 @@ def _update_iotest(guid):
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
+
     return jsonify(result.rowcount)
 
 
@@ -2233,10 +2231,8 @@ def _queue_iotest(test, guid):
         print(repr(e))
         if DEBUG: print_exc()
         abort(BAD_REQUEST)
-    if not result or row2dict(result)['id'] == 'None':
-        abort(BAD_REQUEST)
-    else:
-        return jsonify(row2dict(result))
+
+    return jsonify(guid)
 
 
 if __name__ == '__main__':

@@ -64,37 +64,37 @@ SMTP_USERNAME | Your Gmail email address | (e.g) `team@acme.com`
 
     curl "${api_url}/ping"
 
-	function urlencode() {
-		local encoded="$1"
-		encoded=$(echo ${encoded} | sed 's/%/%25/g')
-		encoded=$(echo ${encoded} | sed 's/ /%20/g')
-		encoded=$(echo ${encoded} | sed 's/!/%21/g')
-		encoded=$(echo ${encoded} | sed 's/#/%23/g')
-		encoded=$(echo ${encoded} | sed 's/\$/%24/g')
-		encoded=$(echo ${encoded} | sed 's/&/%26/g')
-		encoded=$(echo ${encoded} | sed 's/(/%28/g')
-		encoded=$(echo ${encoded} | sed 's/)/%29/g')
-		encoded=$(echo ${encoded} | sed 's/*/%2A/g')
-		encoded=$(echo ${encoded} | sed 's/+/%2B/g')
-		encoded=$(echo ${encoded} | sed 's#\/#%2F#g')
-		encoded=$(echo ${encoded} | sed 's/:/%3A/g')
-		encoded=$(echo ${encoded} | sed 's/;/%3B/g')
-		encoded=$(echo ${encoded} | sed 's/</%3C/g')
-		encoded=$(echo ${encoded} | sed 's/=/%3D/g')
-		encoded=$(echo ${encoded} | sed 's/>/%3E/g')
-		encoded=$(echo ${encoded} | sed 's/?/%3F/g')
-		encoded=$(echo ${encoded} | sed 's/@/%40/g')
-		encoded=$(echo ${encoded} | sed 's/\[/%5B/g')
-		encoded=$(echo ${encoded} | sed 's/\\/%5C/g')
-		encoded=$(echo ${encoded} | sed 's/]/%5D/g')
-		encoded=$(echo ${encoded} | sed 's/\^/%5E/g')
-		encoded=$(echo ${encoded} | sed 's/\`/%60/g')
-		encoded=$(echo ${encoded} | sed 's/{/%7B/g')
-		encoded=$(echo ${encoded} | sed 's/|/%7C/g')
-		encoded=$(echo ${encoded} | sed 's/}/%7D/g')
-		encoded=$(echo ${encoded} | sed 's/~/%7E/g')
-		echo "${encoded}"
-	}
+    function urlencode() {
+        local encoded="$1"
+        encoded=$(echo ${encoded} | sed 's/%/%25/g')
+        encoded=$(echo ${encoded} | sed 's/ /%20/g')
+        encoded=$(echo ${encoded} | sed 's/!/%21/g')
+        encoded=$(echo ${encoded} | sed 's/#/%23/g')
+        encoded=$(echo ${encoded} | sed 's/\$/%24/g')
+        encoded=$(echo ${encoded} | sed 's/&/%26/g')
+        encoded=$(echo ${encoded} | sed 's/(/%28/g')
+        encoded=$(echo ${encoded} | sed 's/)/%29/g')
+        encoded=$(echo ${encoded} | sed 's/*/%2A/g')
+        encoded=$(echo ${encoded} | sed 's/+/%2B/g')
+        encoded=$(echo ${encoded} | sed 's#\/#%2F#g')
+        encoded=$(echo ${encoded} | sed 's/:/%3A/g')
+        encoded=$(echo ${encoded} | sed 's/;/%3B/g')
+        encoded=$(echo ${encoded} | sed 's/</%3C/g')
+        encoded=$(echo ${encoded} | sed 's/=/%3D/g')
+        encoded=$(echo ${encoded} | sed 's/>/%3E/g')
+        encoded=$(echo ${encoded} | sed 's/?/%3F/g')
+        encoded=$(echo ${encoded} | sed 's/@/%40/g')
+        encoded=$(echo ${encoded} | sed 's/\[/%5B/g')
+        encoded=$(echo ${encoded} | sed 's/\\/%5C/g')
+        encoded=$(echo ${encoded} | sed 's/]/%5D/g')
+        encoded=$(echo ${encoded} | sed 's/\^/%5E/g')
+        encoded=$(echo ${encoded} | sed 's/\`/%60/g')
+        encoded=$(echo ${encoded} | sed 's/{/%7B/g')
+        encoded=$(echo ${encoded} | sed 's/|/%7C/g')
+        encoded=$(echo ${encoded} | sed 's/}/%7D/g')
+        encoded=$(echo ${encoded} | sed 's/~/%7E/g')
+        echo "${encoded}"
+    }
 
 ### ToC
 * [PayPal](#paypal)
