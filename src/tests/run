@@ -27,7 +27,7 @@ function install_venv() {
 }
 
 function run_tests() {
-	install_venv
+    install_venv
 
     nosetests --verbosity=2 "$@"
 }
