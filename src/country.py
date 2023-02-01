@@ -7,6 +7,8 @@ try:
 except ImportError:
     from urllib.parse import quote
 
+from sqlalchemy.sql import text
+
 from model import *
 from utils import *
 from config import *
@@ -40,6 +42,7 @@ def get_countries(mask='all'):
     if mask.lower() not in ['all', 'available']: return None
     if mask.lower() == 'all': return ISO_MAP
     if mask.lower() == 'available':
+        available_countries = list()
         try:
             sql = '''
                 SELECT DISTINCT country
@@ -48,18 +51,14 @@ def get_countries(mask='all'):
                 AND status >= 1
                 AND dt >= DATE_SUB(NOW(), INTERVAL {} second)
             '''.format(STALE_NODE_THSHLD)
-            result = session.execute(sql).fetchall()
+            results = session.execute(text(sql))
+            if results.rowcount > 0:
+                available_countries = [dict(row._mapping) for row in results]
+                for country in available_countries:
+                    country['alpha2'] = get_country_alpha2(name=country['country'])
+                    country['quoted'] = quote(country['country'])
         except Exception as e:
             print(repr(e))
             if DEBUG: print_exc()
-            return list()
 
-    available_countries = [
-        dict(row) for row in result
-    ]
-    for country in available_countries:
-        country['alpha2'] = get_country_alpha2(
-            name=country['country']
-        )
-        country['quoted'] = quote(country['country'])
-    return available_countries
+        return available_countries

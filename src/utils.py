@@ -111,17 +111,6 @@ class dotdict(dict):
 
 
 @retry(Exception, cdata='method={}'.format(stack()[0][3]))
-def row2dict(row):
-    d = {}
-    for column in row.__table__.columns:
-        if isinstance(getattr(row, column.name), int):
-            d[column.name] = int(getattr(row, column.name))
-        else:
-            d[column.name] = str(getattr(row, column.name))
-    return d
-
-
-@retry(Exception, cdata='method={}'.format(stack()[0][3]))
 def map_countries():
     data = open(COUNTRY_DATA, 'rt', encoding='utf-8').read()
     countries = json.loads(data)
