@@ -1,4 +1,6 @@
 option_settings:
+  aws:ec2:vpc:
+    AssociatePublicIpAddress: true
   aws:elasticbeanstalk:application:environment:
     API_SECRET: ${API_SECRET}
     BITCOIN_PAYMENT_WALLET_XPUBKEY: ${BITCOIN_PAYMENT_WALLET_XPUBKEY}
