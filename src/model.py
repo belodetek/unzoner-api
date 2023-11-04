@@ -253,6 +253,7 @@ class NetflixVideoDiags(Base):
     BuffersizeinBytes_a_v_ = Column(String(255), index=True, unique=False)
     BuffersizeinSeconds_a_v_ = Column(String(255), index=True, unique=False)
     CurrentCDN_a_v_ = Column(String(255), index=True, unique=False)
+    Downloadables_a_v_ = Column(String(255), index=True, unique=False)
     PBCID = Column(String(255), index=True, unique=False)
     CurrentDroppedFrames = Column(String(255), index=True, unique=False)
     DFR = Column(String(255), index=True, unique=False)
@@ -263,6 +264,7 @@ class NetflixVideoDiags(Base):
     MainThreadstall_sec = Column(String(255), index=True, unique=False)
     MaxSustainableVideoBitrate = Column(String(255), index=True, unique=False)
     MovieId = Column(String(255), index=True, unique=False)
+    PackageId = Column(String(255), index=True, unique=False)
     PlayerDuration = Column(String(255), index=True, unique=False)
     Playerstate = Column(String(255), index=True, unique=False)
     Playing_Bufferingvmaf = Column(String(255), index=True, unique=False)
@@ -304,6 +306,7 @@ class NetflixVideoDiags(Base):
         BuffersizeinBytes_a_v_,
         BuffersizeinSeconds_a_v_,
         CurrentCDN_a_v_,
+        Downloadables_a_v_,
         PBCID,
         CurrentDroppedFrames,
         DFR,
@@ -314,6 +317,7 @@ class NetflixVideoDiags(Base):
         MainThreadstall_sec,
         MaxSustainableVideoBitrate,
         MovieId,
+        PackageId,
         PlayerDuration,
         Playerstate,
         Playing_Bufferingvmaf,
@@ -353,9 +357,10 @@ class NetflixVideoDiags(Base):
         self.BuffersizeinBytes_a_v_ = BuffersizeinBytes_a_v_
         self.BuffersizeinSeconds_a_v_ = BuffersizeinSeconds_a_v_
         self.CurrentCDN_a_v_ = CurrentCDN_a_v_
-        self.PBCID = PBCID
         self.CurrentDroppedFrames = CurrentDroppedFrames
         self.DFR = DFR
+        self.Downloadables_a_v_ = Downloadables_a_v_
+        self.PBCID = PBCID
         self.Duration = Duration
         self.Esn = Esn
         self.Framerate = Framerate
@@ -363,6 +368,7 @@ class NetflixVideoDiags(Base):
         self.MainThreadstall_sec = MainThreadstall_sec
         self.MaxSustainableVideoBitrate = MaxSustainableVideoBitrate
         self.MovieId = MovieId
+        self.PackageId = PackageId
         self.PlayerDuration = PlayerDuration
         self.Playerstate = Playerstate
         self.Playing_Bufferingvmaf = Playing_Bufferingvmaf
